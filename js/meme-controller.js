@@ -15,7 +15,7 @@ function renderMeme() {
     const img = getImgFromlocal(selectedImgId);
     img.onload = () => {
         gCanvas.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-        setLineSettings(lines[0]);
+        setLineSettings(lines[0], lines[0].color);
         drawText(lines[0].txt, getMiddleForTxt(gElCanvas.width, lines[0].txt),
             lines[0].size, lines[0].size);
     }
@@ -26,13 +26,18 @@ function onTextChange(txt) {
     renderMeme();
 }
 
+function onTxtColorChange(color) {
+    setTxtColor(color);
+    renderMeme();
+}
+
 function getImgFromlocal(imgId = 1) {
     const img = new Image();
     img.src = `imgs/${imgId}.jpg`;
     return img;
 }
 
-function setLineSettings(line, lineWidth = 1, stroke = 'black', fill = 'white') {
+function setLineSettings(line, fill = 'white', stroke = 'black', lineWidth = 1) {
     let size = line.size;
     gCanvas.font = `${size}px ${line.font}`;
 

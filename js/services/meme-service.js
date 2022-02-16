@@ -5,14 +5,14 @@ const NUM_OF_IMGS = 18;
 var gImgs = _createImgs();
 
 var gMeme = {
-    selectedImgId: 5,
+    selectedImgId: 0,
     selectedLineIdx: 0,
     lines: [
         {
             txt: 'I sometimes eat Falafel',
             size: 48,
             align: 'center',
-            color: 'red',
+            color: 'white',
             font: 'Impact'
         }
     ]
@@ -40,6 +40,10 @@ function setLineSize(size) {
 
 function setFontStyle(font) {
     gMeme.lines[gMeme.selectedLineIdx].font = font;
+}
+
+function setTxtColor(color) {
+    gMeme.lines[gMeme.selectedLineIdx].color = color;
 }
 
 function _createImgs() {

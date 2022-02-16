@@ -22,14 +22,19 @@
     </header>
 
     <section class="gallery-container">
+        <section class="gallery-imgs">
 
+        </section>
     </section>
 
     <section class="meme-editor-container hidden">
+        <div class="options-container">
+            <input type="text" name="meme-text" oninput="onTextChange(this.value)"
+                placeholder="I sometimes eat Falafel">
+            <input type="color" name="text-color" value="#ffffff" oninput="onTxtColorChange(this.value)">
+        </div>
         <section class="canvas-container">
             <canvas width="500" height="500" style="border: 1px solid green;"></canvas>
-            <input type="text" name="meme-text" id="meme-text" oninput="onTextChange(this.value)"
-                placeholder="I sometimes eat Falafel">
         </section>
     </section>
 

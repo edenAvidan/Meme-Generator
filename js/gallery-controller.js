@@ -2,7 +2,7 @@
 
 
 function renderGallery() {
-    const elGalllary = document.querySelector('.gallery-container');
+    const elGalllary = document.querySelector('.gallery-imgs');
     const imgs = getImgs();
     var strHTML = '';
     imgs.forEach((img) => {
