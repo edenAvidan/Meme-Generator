@@ -1,15 +1,16 @@
-* {
-    box-sizing: border-box;
-}
 
-html {
-    
-}
+/* SETUP */
+@import 'setup/vars.css';
+@import 'setup/typography.css';
 
-body {
-    margin: 0;
-}
 
-.hidden {
-    display: none;
-}
+/* BASE */
+
+@import 'basic/base.css';
+@import 'basic/layout.css';
+
+/* COMPONENTS */
+
+@import 'components/main-header.css';
+@import 'components/gallery-container.css';
+@import 'components/scroller-bar.css';

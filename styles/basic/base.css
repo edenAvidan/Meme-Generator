@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 1.3rem;
+    font-family: poppins-medium;
+}
+
+body {
+    margin: 0;
+    background-color: var(--clr1);
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--clr2);
+}
+
+.hidden {
+    display: none;
+}
