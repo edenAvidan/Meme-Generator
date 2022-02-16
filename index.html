@@ -15,7 +15,7 @@
         <h2 class="logo">Logo</h2>
         <nav class="main-nav-container">
             <ul class="main-nav">
-                <li><a href="#" onclick="toggleEditorAndGallery()">Gallery</a></li>
+                <li><a href="#">Gallery</a></li>
                 <li><a href="#">About</a></li>
             </ul>
         </nav>
@@ -32,10 +32,12 @@
             <input type="text" name="meme-text" oninput="onTextChange(this.value)"
                 placeholder="I sometimes eat Falafel">
             <input type="color" name="text-color" value="#ffffff" oninput="onTxtColorChange(this.value)">
+            <button class="font-btn increase-font" onclick="onFontSizeChange(1)">&#8593;</button>
+            <button class="font-btn decrease-font" onclick="onFontSizeChange(-1)"">&#8595;</button>
         </div>
-        <section class="canvas-container">
-            <canvas width="500" height="500" style="border: 1px solid green;"></canvas>
-        </section>
+        <section class=" canvas-container">
+                <canvas width="500" height="500" style="border: 1px solid green;"></canvas>
+    </section>
     </section>
 
     <script src="js/services/meme-service.js"></script>
