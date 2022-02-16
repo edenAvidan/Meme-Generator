@@ -9,15 +9,33 @@
     <title>Meme Generator</title>
 </head>
 
-<body>
-    <section class="gallery">
+<body onload="renderGallery()">
+
+    <header class="main-header">
+        <h2 class="logo">Logo</h2>
+        <nav class="main-nav-container">
+            <ul class="main-nav">
+                <li><a href="#" onclick="toggleEditorAndGallery()">Gallery</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="gallery-container">
 
     </section>
 
-    <section class="meme-editor">
-
+    <section class="meme-editor-container hidden">
+        <section class="canvas-container">
+            <canvas width="500" height="500" style="border: 1px solid green;"></canvas>
+            <input type="text" name="meme-text" id="meme-text" oninput="onTextChange(this.value)"
+                placeholder="I sometimes eat Falafel">
+        </section>
     </section>
+
+    <script src="js/services/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>
+    <script src="js/meme-controller.js"></script>
 </body>
 
 </html>
