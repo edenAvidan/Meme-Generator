@@ -31,6 +31,11 @@ function onTxtColorChange(color) {
     renderMeme();
 }
 
+function onFontSizeChange(change) {
+    changeFontSize(change);
+    renderMeme();
+}
+
 function getImgFromlocal(imgId = 1) {
     const img = new Image();
     img.src = `imgs/${imgId}.jpg`;
@@ -52,7 +57,7 @@ function setLineSettings(line, fill = 'white', stroke = 'black', lineWidth = 1) 
 }
 
 function drawText(text, x, y) {
-    gCanvas.fillText(text, x, y, 500); // 500 need to chaneg to canvas current width
+    gCanvas.fillText(text, x, y, 500); // 500 need to change to canvas current width
     gCanvas.strokeText(text, x, y);
 }
 

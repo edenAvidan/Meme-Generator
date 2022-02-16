@@ -46,6 +46,10 @@ function setTxtColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color;
 }
 
+function changeFontSize(change) {
+    gMeme.lines[gMeme.selectedLineIdx].size += change;
+}
+
 function _createImgs() {
     var imgs = [];
     for (let i = 1; i <= NUM_OF_IMGS; i++) {
