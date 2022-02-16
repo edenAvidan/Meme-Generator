@@ -12,6 +12,7 @@ function renderGallery() {
 }
 
 function onImgSelect(imgId) {
+    createMeme();
     setImg(imgId);
     renderMeme();
     document.querySelector('.meme-editor-container').classList.remove('hidden');

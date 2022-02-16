@@ -31,15 +31,23 @@
         <div class="options-container">
             <input type="text" name="meme-text" oninput="onTextChange(this.value)"
                 placeholder="I sometimes eat Falafel">
+
+            <button class="add-line" onclick="onAddLine()">+</button>
+
             <input type="color" name="text-color" value="#ffffff" oninput="onTxtColorChange(this.value)">
-            <button class="font-btn increase-font" onclick="onFontSizeChange(1)">&#8593;</button>
-            <button class="font-btn decrease-font" onclick="onFontSizeChange(-1)"">&#8595;</button>
+            <button class="switch-line" onclick="onSwitchLineFocus()">&#8593; &#8595;</button>
+
+            <button class="increase-font" onclick="onFontSizeChange(1)">A<sup>+</sup></button>
+            <button class="decrease-font" onclick="onFontSizeChange(-1)">A<sup>-</sup></button>
         </div>
+
         <section class=" canvas-container">
-                <canvas width="500" height="500" style="border: 1px solid green;"></canvas>
-    </section>
+            <canvas width="500" height="500" style="border: 1px solid green;"></canvas>
+        </section>
+
     </section>
 
+    <script src="js/services/utils-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>
     <script src="js/meme-controller.js"></script>

@@ -1,33 +1,44 @@
 'use strict'
 
 const NUM_OF_IMGS = 18;
+const INITIAL_TXT_SIZE = 48;
 
 var gImgs = _createImgs();
 
-var gMeme = {
-    selectedImgId: 0,
-    selectedLineIdx: 0,
-    lines: [
-        {
-            txt: 'I sometimes eat Falafel',
-            size: 48,
-            align: 'center',
-            color: 'white',
-            font: 'Impact'
-        }
-    ]
+var gMeme;
+
+function createMeme() {
+    gMeme = {
+        selectedImgId: 0,
+        selectedLineIdx: 0,
+        lines: [
+            _createLine()
+        ]
+    };
 }
 
 function getMeme() {
-    return (gMeme);
+    return gMeme;
 }
 
 function getImgs() {
     return gImgs;
 }
 
+function addLine() {
+    return gMeme.lines.push(_createLine());
+}
+
+function getLineInitTxtSize() {
+    return INITIAL_TXT_SIZE;
+}
+
 function setImg(imgId) {
     gMeme.selectedImgId = imgId;;
+}
+
+function getSelectedLineText() {
+    return gMeme.lines[gMeme.selectedLineIdx].txt;
 }
 
 function setLineTxt(txt) {
@@ -48,6 +59,24 @@ function setTxtColor(color) {
 
 function changeFontSize(change) {
     gMeme.lines[gMeme.selectedLineIdx].size += change;
+}
+
+function setSelectedLineIdx(newIdx) {
+    gMeme.selectedLineIdx = newIdx;
+}
+
+function setLinePos(pos) {
+    gMeme.lines[gMeme.selectedLineIdx].pos = pos;
+}
+
+function _createLine() {
+    return {
+        txt: 'I sometimes eat Falafel',
+        size: INITIAL_TXT_SIZE,
+        align: 'center',
+        color: 'white',
+        font: 'Impact'
+    };
 }
 
 function _createImgs() {
