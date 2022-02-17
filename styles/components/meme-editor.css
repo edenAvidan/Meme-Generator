@@ -1,0 +1,35 @@
+.meme-editor-container:not(.hidden) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    gap: 2em;
+} 
+
+.meme-editor-container .options-container {
+    display: flex;
+    flex-direction: column;
+    gap: .6em;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+    width: 30%;
+    background-color: var(--clr1);
+    padding: 25px 45px;
+}
+
+.meme-editor-container .options-container input[type=text] {
+    background-color: var(--clr8);
+    border: 0;
+    border-radius: 1.7548rem;
+    text-align: center;
+    width: 80%;
+    padding: 5px;
+}
+
+.meme-editor-container .options-container .btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6em;
+}

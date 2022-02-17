@@ -3,24 +3,31 @@
 var gElCanvas;
 var gCanvas;
 
-init();
+initCanvas();
 
-function init() {
+function initCanvas() {
     gElCanvas = document.querySelector('canvas');
     gCanvas = gElCanvas.getContext('2d');
+    window.addEventListener('resize', () => {
+        const elMemeEditor = document.querySelector('.meme-editor-container');
+        if (!elMemeEditor.classList.contains('hidden')) {
+            resizeMeme();
+            renderMeme();
+        }
+    });
 }
 
 function renderMeme() {
     const { selectedImgId, lines } = getMeme();
     const img = getImgFromlocal(selectedImgId);
     img.onload = () => {
+        resizeMeme();
         gCanvas.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-
         lines.forEach((line, idx) => {
             setLineSettings(line);
             drawText(line.txt, getTxtCenterX(gElCanvas.width, line.txt),
                 getInitialLineYPos(idx + 1), line.size);
-        })
+        });
     }
 }
 
@@ -44,7 +51,8 @@ function onSwitchLineFocus() {
     const nextLineIdx = selectedLineIdx + 1 < lines.length ? selectedLineIdx + 1 : 0;
     setSelectedLineIdx(nextLineIdx);
 
-    document.querySelector('input[name="meme-text"]').value = getSelectedLineText();
+    document.querySelector('input[name="meme-text"]').value = getLineText();
+    document.querySelector('input[name="text-color"]').value = getTxtColor();
 }
 
 function onAddLine() {
@@ -52,13 +60,14 @@ function onAddLine() {
     const newLineIdx = numOfLines - 1;
     setSelectedLineIdx(newLineIdx);
 
-    const linePos = createPos(getTxtCenterX(gElCanvas.width, getSelectedLineText()),
+    const linePos = createPos(getTxtCenterX(gElCanvas.width, getLineText()),
         getInitialLineYPos(numOfLines));
     setLinePos(linePos);
 
     const elMemeTextInput = document.querySelector('input[name="meme-text"]');
+    document.querySelector('input[name="text-color"]').value = '#ffffff';
     elMemeTextInput.value = '';
-    elMemeTextInput.placeholder = getSelectedLineText();
+    elMemeTextInput.placeholder = getLineText();
     renderMeme();
 }
 
@@ -91,6 +100,12 @@ function getTxtHeight(txt) {  // not currently used
 function getTxtCenterX(x, txt) {
     const txtWidth = getTxtWidth(txt);
     return (x - txtWidth) / 2;
+}
+
+function resizeMeme() {
+    const elContainer = document.querySelector('.options-container');
+    gElCanvas.width = elContainer.clientWidth;
+    gElCanvas.height = elContainer.clientHeight;
 }
 
 function getInitialLineYPos(numOfLines) {

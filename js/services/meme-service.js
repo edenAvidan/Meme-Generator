@@ -37,7 +37,7 @@ function setImg(imgId) {
     gMeme.selectedImgId = imgId;;
 }
 
-function getSelectedLineText() {
+function getLineText() {
     return gMeme.lines[gMeme.selectedLineIdx].txt;
 }
 
@@ -57,6 +57,10 @@ function setTxtColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color;
 }
 
+function getTxtColor() {
+    return gMeme.lines[gMeme.selectedLineIdx].color;
+}
+
 function changeFontSize(change) {
     gMeme.lines[gMeme.selectedLineIdx].size += change;
 }
@@ -74,7 +78,7 @@ function _createLine() {
         txt: 'I sometimes eat Falafel',
         size: INITIAL_TXT_SIZE,
         align: 'center',
-        color: 'white',
+        color: '#ffffff',
         font: 'Impact'
     };
 }

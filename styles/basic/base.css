@@ -14,12 +14,28 @@ body {
 
 img {
     width: 100%;
+    cursor: pointer;
 }
 
 a {
     text-decoration: none;
     cursor: pointer;
     color: var(--clr2);
+}
+
+.btn-container > * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    height: 35px;
+    width: 35px;
+    font-size: 1em;
+    line-height: 1;
+    cursor: pointer;
+    background-color: white;
+    color: var(--clr7);
+    font-family: poppins-bold;
 }
 
 .hidden {
