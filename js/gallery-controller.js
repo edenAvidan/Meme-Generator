@@ -9,7 +9,7 @@ function renderGallery() {
         strHTML += `<img src="${img.url}" class="gallery-img" onclick="onImgSelect(${img.id})" />`
     })
     elGalllary.innerHTML = strHTML;
-}
+};
 
 function onImgSelect(imgId) {
     createMeme();
@@ -17,6 +17,12 @@ function onImgSelect(imgId) {
     renderMeme();
     document.querySelector('.meme-editor-container').classList.remove('hidden');
     document.querySelector('.gallery-container').classList.add('hidden');
+}
+
+function openGallery() {
+    document.querySelector('.meme-editor-container').classList.add('hidden');
+    document.querySelector('.gallery-container').classList.remove('hidden');
+    if (document.body.classList.contains('menu-open')) toggleMenu();
 }
 
 function toggleMenu() {

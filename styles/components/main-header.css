@@ -1,4 +1,4 @@
-.header-container.main-header {
+.main-header {
     height: 75px;
     display: flex;
     justify-content: space-between;
@@ -6,7 +6,10 @@
     border-radius: 1.7548rem;
     background-image: linear-gradient(274deg, var(--clr3) 112%, var(--clr4) -12%);
     margin: .76923rem auto;
-    
+}
+
+.main-header .logo {
+    cursor: pointer;
 }
 
 .main-header .main-nav {
@@ -34,7 +37,7 @@
     border: 0;
 }
 
-@media (min-width: 790px) {
+@media (min-width: 791px) {
     .btn-menu {
         display: none;
     }
@@ -47,7 +50,7 @@
         top: 0;
         right: 0;
         flex-direction: column;
-        background-color: var(--clr3);
+        background-color: rgba(51, 190, 109, .95);
         height: 100vh;
         min-width: 220px;
         border-left: solid 1px var(--clr6);
@@ -64,6 +67,6 @@
         transition: background-color .3s;
     }
     .main-header .main-nav a:hover {
-        background-color: #2DAB62;
+        background-color: var(--clr6);
     }
 }
