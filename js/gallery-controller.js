@@ -18,3 +18,7 @@ function onImgSelect(imgId) {
     document.querySelector('.meme-editor-container').classList.remove('hidden');
     document.querySelector('.gallery-container').classList.add('hidden');
 }
+
+function toggleMenu() {
+    document.body.classList.toggle("menu-open");
+}

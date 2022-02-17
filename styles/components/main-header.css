@@ -5,7 +5,8 @@
     align-items: center;
     border-radius: 1.7548rem;
     background-image: linear-gradient(274deg, var(--clr3) 112%, var(--clr4) -12%);
-    margin-bottom: .76923rem;
+    margin: .76923rem auto;
+    
 }
 
 .main-header .main-nav {
@@ -16,5 +17,53 @@
 }
 
 .main-header .main-nav a {
+    text-transform: capitalize;
     padding-right: 4.5rem;
+}
+
+.main-header .btn-menu {
+    margin-right: 1rem;
+}
+
+.main-header .main-nav-container .btn-menu {
+    background-color: var(--clr2);
+    color: var(--clr4);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 0;
+}
+
+@media (min-width: 790px) {
+    .btn-menu {
+        display: none;
+    }
+}
+
+
+@media (max-width: 790px) {
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        flex-direction: column;
+        background-color: var(--clr3);
+        height: 100vh;
+        min-width: 220px;
+        border-left: solid 1px var(--clr6);
+        transform: translateX(100%);
+        transition: transform .6s, box-shadow .6s;
+    }
+    body.menu-open .main-nav {
+        transform: translateX(0);
+        box-shadow: -10px 0px 13px rgb(0 0 0 / 16%);
+    }
+    .main-header .main-nav a {
+        display: block;
+        padding: 1.125rem 1.6rem;
+        transition: background-color .3s;
+    }
+    .main-header .main-nav a:hover {
+        background-color: #2DAB62;
+    }
 }

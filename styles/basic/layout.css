@@ -1,4 +1,6 @@
 .main-layout {
     max-width: 90%;
+    padding-right: 2%;
+    padding-left: 2%;
     margin: 0 auto;
 }

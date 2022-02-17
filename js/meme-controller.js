@@ -17,8 +17,8 @@ function renderMeme() {
         gCanvas.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
 
         lines.forEach((line, idx) => {
-            setLineSettings(line, line.color);
-            drawText(line.txt, getMiddleForTxt(gElCanvas.width, line.txt),
+            setLineSettings(line);
+            drawText(line.txt, getTxtCenterX(gElCanvas.width, line.txt),
                 getInitialLineYPos(idx + 1), line.size);
         })
     }
@@ -52,7 +52,7 @@ function onAddLine() {
     const newLineIdx = numOfLines - 1;
     setSelectedLineIdx(newLineIdx);
 
-    const linePos = createPos(getMiddleForTxt(gElCanvas.width, getSelectedLineText()),
+    const linePos = createPos(getTxtCenterX(gElCanvas.width, getSelectedLineText()),
         getInitialLineYPos(numOfLines));
     setLinePos(linePos);
 
@@ -68,22 +68,15 @@ function getImgFromlocal(imgId = 1) {
     return img;
 }
 
-function setLineSettings(line, fill = 'white', stroke = 'black', lineWidth = 1) {
-    let size = line.size;
-    gCanvas.font = `${size}px ${line.font}`;
-
-    while (getTxtWidth(line.txt) > gElCanvas.width && size > 2) {
-        size -= 2;
-        gCanvas.font = `${size}px ${line.font}`;
-    }
-
+function setLineSettings(line, stroke = 'black', lineWidth = 1) {
+    gCanvas.font = `${line.size}px ${line.font}`;
     gCanvas.lineWidth = lineWidth; // need to change
     gCanvas.strokeStyle = stroke; // need to change
-    gCanvas.fillStyle = fill; // need to change
+    gCanvas.fillStyle = line.color; // need to change
 }
 
 function drawText(text, x, y) {
-    gCanvas.fillText(text, x, y, 500); // 500 need to change to canvas current width
+    gCanvas.fillText(text, x, y);
     gCanvas.strokeText(text, x, y);
 }
 
@@ -95,13 +88,14 @@ function getTxtHeight(txt) {  // not currently used
     return gCanvas.measureText(txt).height;
 }
 
-function getMiddleForTxt(x, txt) {
+function getTxtCenterX(x, txt) {
     const txtWidth = getTxtWidth(txt);
     return (x - txtWidth) / 2;
 }
 
 function getInitialLineYPos(numOfLines) {
-    if (numOfLines === 1) return getLineInitTxtSize();
-    else if (numOfLines === 2) return gElCanvas.height;
+    const fontSize = getLineInitTxtSize();
+    if (numOfLines === 1) return fontSize;
+    else if (numOfLines === 2) return gElCanvas.height - fontSize;
     else return gElCanvas.height / 2;
 }

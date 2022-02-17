@@ -1,9 +1,23 @@
+.gallery-container {
+    background-color: var(--clr1);
+}
+
 .gallery-container .gallery-imgs {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 30px;
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    overflow: auto
 }
 
 .gallery-container .gallery-imgs img {
-    border-radius: 1.5em;
+    border-radius: 20px;
+}
+
+@media (max-width: 790px) {
+    .gallery-container .gallery-imgs {
+        grid-template-columns: 1fr 1fr;
+    }
 }
