@@ -104,8 +104,8 @@ function getTxtCenterX(x, txt) {
 
 function resizeMeme() {
     const elContainer = document.querySelector('.options-container');
-    gElCanvas.width = elContainer.clientWidth;
-    gElCanvas.height = elContainer.clientHeight;
+    gElCanvas.width = elContainer.offsetWidth;
+    gElCanvas.height = elContainer.offsetHeight;
 }
 
 function getInitialLineYPos(numOfLines) {
@@ -114,3 +114,4 @@ function getInitialLineYPos(numOfLines) {
     else if (numOfLines === 2) return gElCanvas.height - fontSize;
     else return gElCanvas.height / 2;
 }
+
