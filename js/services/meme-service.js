@@ -1,7 +1,7 @@
 'use strict'
 
 const NUM_OF_IMGS = 18;
-const INITIAL_TXT_SIZE = 48;
+const INITIAL_TXT_SIZE = 36;
 
 var gImgs = _createImgs();
 
@@ -75,7 +75,7 @@ function setLinePos(pos) {
 
 function _createLine() {
     return {
-        txt: 'I sometimes eat Falafel',
+        txt: 'Write Something!',
         size: INITIAL_TXT_SIZE,
         align: 'center',
         color: '#ffffff',
