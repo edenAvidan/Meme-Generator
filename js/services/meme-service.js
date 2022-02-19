@@ -1,7 +1,8 @@
 'use strict'
 
 const NUM_OF_IMGS = 18;
-const INITIAL_TXT_SIZE = 36;
+const DEFUALT_TXT_SIZE = 28;
+const DEFUALT_TXT = 'Write Something!';
 
 var gImgs = _createImgs();
 
@@ -25,16 +26,31 @@ function getImgs() {
     return gImgs;
 }
 
-function addLine() {
-    return gMeme.lines.push(_createLine());
+function getNumberOfLines() {
+    return gMeme.lines.length;
 }
 
-function getLineInitTxtSize() {
-    return INITIAL_TXT_SIZE;
+function addLine(txt = DEFUALT_TXT) {
+    return gMeme.lines.push(_createLine(txt));
+}
+
+function deleteLine() {
+    const lineIdx = gMeme.selectedLineIdx;
+    gMeme.lines.splice(lineIdx, 1);
+
+    if (gMeme.selectedLineIdx) gMeme.selectedLineIdx--;
+}
+
+function getDefualtTxtSize() {
+    return DEFUALT_TXT_SIZE;
+}
+
+function getDefualtTxt() {
+    return DEFUALT_TXT;
 }
 
 function setImg(imgId) {
-    gMeme.selectedImgId = imgId;;
+    gMeme.selectedImgId = imgId;
 }
 
 function getCurrLine() {
@@ -98,10 +114,10 @@ function moveLine(line, dx, dy) {
     line.pos.y += dy
 }
 
-function _createLine() {
+function _createLine(txt = DEFUALT_TXT) {
     return {
-        txt: 'Write Something!',
-        size: INITIAL_TXT_SIZE,
+        txt,
+        size: DEFUALT_TXT_SIZE,
         align: 'center',
         color: '#ffffff',
         font: 'Impact',

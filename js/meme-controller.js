@@ -56,6 +56,7 @@ function renderMeme() {
 }
 
 function onTextChange(txt) {
+    if (!getCurrLine()) addLine();
     setLineTxt(txt);
     renderMeme();
 }
@@ -84,7 +85,7 @@ function onAddLine() {
     const newLineIdx = numOfLines - 1;
     setSelectedLineIdx(newLineIdx);
 
-    const defualtLineTxt = getLineText();
+    const defualtLineTxt = getDefualtTxt();
     const linePos = createPos(getTxtCenterX(gElCanvas.width, defualtLineTxt),
         getInitialLineYPos(numOfLines));
     setLinePos(linePos);
@@ -92,7 +93,21 @@ function onAddLine() {
     const elMemeTextInput = document.querySelector('input[name="meme-text"]');
     document.querySelector('input[name="text-color"]').value = '#ffffff';
     elMemeTextInput.value = '';
-    elMemeTextInput.placeholder = getLineText();
+    elMemeTextInput.placeholder = defualtLineTxt;
+    renderMeme();
+}
+
+function onDeleteLine() {
+    deleteLine();
+    if (getCurrLine()) {
+        document.querySelector('input[name="meme-text"]').value = getLineText();
+        document.querySelector('input[name="text-color"]').value = getTxtColor();
+    } else {
+        const elMemeTextInput = document.querySelector('input[name="meme-text"]');
+        document.querySelector('input[name="text-color"]').value = '#ffffff';
+        elMemeTextInput.value = '';
+        elMemeTextInput.placeholder = getDefualtTxt();
+    }
     renderMeme();
 }
 
@@ -134,15 +149,16 @@ function resizeMeme() {
 }
 
 function getInitialLineYPos(numOfLines) {
-    const fontSize = getLineInitTxtSize();
+    const fontSize = getDefualtTxtSize();
     if (numOfLines === 1) return fontSize;
     else if (numOfLines === 2) return gElCanvas.height - fontSize;
     else return gElCanvas.height / 2;
 }
 
 function onDown(ev) {
-    const pos = getEvPos(ev)
+    if (!getNumberOfLines()) return;
 
+    const pos = getEvPos(ev)
     if (!isOverLine(pos, getTxtWidth(getLineText()))) return;
 
     setLineDrag(true)
@@ -150,8 +166,9 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-    const pos = getEvPos(ev)
+    if (!getNumberOfLines()) return;
 
+    const pos = getEvPos(ev)
     if (isOverLine(pos, getTxtWidth(getLineText()))) {
         document.body.style.cursor = 'pointer';
     }
@@ -167,5 +184,6 @@ function onMove(ev) {
 }
 
 function onUp() {
+    if (!getNumberOfLines()) return;
     setLineDrag(false);
 }

@@ -29,6 +29,10 @@
     gap: .6em;
 }
 
+.meme-editor-container .options-container .btn-container .delete-line {
+    font-size: 1.4em;
+}
+
 .meme-editor-container .options-container input[type=text] {
     background-color: var(--clr8);
     border: 0;
