@@ -43,14 +43,14 @@ function renderMeme() {
     img.onload = () => {
         resizeMeme();
         gCanvas.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+
         lines.forEach(line => {
             setLineSettings(line);
             if (!getLinePos()) {
                 setLinePos(createPos(getTxtCenterX(gElCanvas.width, getDefualtTxt()),
                     getInitialLineYPos(1)));
             }
-            const linePos = line.pos;
-            drawText(line.txt, linePos.x, linePos.y, line.size);
+            drawText(line.txt, line.pos.x, line.pos.y, line.size);
         });
     }
 }
@@ -90,25 +90,27 @@ function onAddLine() {
         getInitialLineYPos(numOfLines));
     setLinePos(linePos);
 
-    const elMemeTextInput = document.querySelector('input[name="meme-text"]');
-    document.querySelector('input[name="text-color"]').value = '#ffffff';
-    elMemeTextInput.value = '';
-    elMemeTextInput.placeholder = defualtLineTxt;
+    setElInputs();
     renderMeme();
 }
 
 function onDeleteLine() {
     deleteLine();
-    if (getCurrLine()) {
-        document.querySelector('input[name="meme-text"]').value = getLineText();
-        document.querySelector('input[name="text-color"]').value = getTxtColor();
-    } else {
-        const elMemeTextInput = document.querySelector('input[name="meme-text"]');
-        document.querySelector('input[name="text-color"]').value = '#ffffff';
-        elMemeTextInput.value = '';
+
+    if (getCurrLine()) setElInputs(getLineText(), getTxtColor())
+    else setElInputs();
+
+    renderMeme();
+}
+
+function setElInputs(txt = '', color = '#ffffff') {
+    const elMemeTextInput = document.querySelector('input[name="meme-text"]');
+    if (!txt) {
         elMemeTextInput.placeholder = getDefualtTxt();
     }
-    renderMeme();
+
+    document.querySelector('input[name="meme-text"]').value = txt;
+    document.querySelector('input[name="text-color"]').value = color;
 }
 
 function getImgFromlocal(imgId = 1) {
@@ -119,9 +121,9 @@ function getImgFromlocal(imgId = 1) {
 
 function setLineSettings(line, stroke = 'black', lineWidth = 1) {
     gCanvas.font = `${line.size}px ${line.font}`;
+    gCanvas.fillStyle = line.color;
     gCanvas.lineWidth = lineWidth; // need to change
     gCanvas.strokeStyle = stroke; // need to change
-    gCanvas.fillStyle = line.color; // need to change
 }
 
 function drawText(text, x, y) {
@@ -131,10 +133,6 @@ function drawText(text, x, y) {
 
 function getTxtWidth(txt) {
     return gCanvas.measureText(txt).width;
-}
-
-function getTxtHeight(txt) {
-    return gCanvas.measureText(txt).height;
 }
 
 function getTxtCenterX(x, txt) {

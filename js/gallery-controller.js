@@ -14,7 +14,12 @@ function renderGallery() {
 function onImgSelect(imgId) {
     createMeme();
     setImg(imgId);
+    setElInputs();
+    openMemeEditor();
     renderMeme();
+}
+
+function openMemeEditor() {
     document.querySelector('.meme-editor-container').classList.remove('hidden');
     document.querySelector('.gallery-container').classList.add('hidden');
 }

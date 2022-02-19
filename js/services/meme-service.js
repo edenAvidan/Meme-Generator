@@ -65,16 +65,16 @@ function setLineTxt(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }
 
-function setLineSize(size) {
-    gMeme.lines[gMeme.selectedLineIdx].size = size;
+function setLineSize(newSize) {
+    gMeme.lines[gMeme.selectedLineIdx].size = newSize;
 }
 
-function setFontStyle(font) {
-    gMeme.lines[gMeme.selectedLineIdx].font = font;
+function setFontStyle(newFont) {
+    gMeme.lines[gMeme.selectedLineIdx].font = newFont;
 }
 
-function setTxtColor(color) {
-    gMeme.lines[gMeme.selectedLineIdx].color = color;
+function setTxtColor(newColor) {
+    gMeme.lines[gMeme.selectedLineIdx].color = newColor;
 }
 
 function getTxtColor() {
@@ -93,8 +93,8 @@ function setLineDrag(isDrag) {
     gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
 }
 
-function setLinePos(pos) {
-    gMeme.lines[gMeme.selectedLineIdx].pos = pos;
+function setLinePos(newPos) {
+    gMeme.lines[gMeme.selectedLineIdx].pos = newPos;
 }
 
 function getLinePos() {
@@ -118,7 +118,6 @@ function _createLine(txt = DEFUALT_TXT) {
     return {
         txt,
         size: DEFUALT_TXT_SIZE,
-        align: 'center',
         color: '#ffffff',
         font: 'Impact',
         isDrag: false
