@@ -37,12 +37,16 @@ function setImg(imgId) {
     gMeme.selectedImgId = imgId;;
 }
 
+function getCurrLine() {
+    return gMeme.lines[gMeme.selectedLineIdx];
+}
+
 function getLineText() {
     return gMeme.lines[gMeme.selectedLineIdx].txt;
 }
 
 function setLineTxt(txt) {
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt;;
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
 }
 
 function setLineSize(size) {
@@ -69,8 +73,30 @@ function setSelectedLineIdx(newIdx) {
     gMeme.selectedLineIdx = newIdx;
 }
 
+function setLineDrag(isDrag) {
+    gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
+}
+
 function setLinePos(pos) {
     gMeme.lines[gMeme.selectedLineIdx].pos = pos;
+}
+
+function getLinePos() {
+    return gMeme.lines[gMeme.selectedLineIdx].pos;
+}
+
+function isOverLine(eventPos, lineWidth) {
+    const currLine = gMeme.lines[gMeme.selectedLineIdx]
+    const { pos } = currLine;
+
+    // 257 needs to change to current line text width.
+    return eventPos.x >= pos.x && eventPos.x <= pos.x + lineWidth &&
+        eventPos.y <= pos.y && eventPos.y >= pos.y - currLine.size
+}
+
+function moveLine(line, dx, dy) {
+    line.pos.x += dx
+    line.pos.y += dy
 }
 
 function _createLine() {
@@ -79,7 +105,8 @@ function _createLine() {
         size: INITIAL_TXT_SIZE,
         align: 'center',
         color: '#ffffff',
-        font: 'Impact'
+        font: 'Impact',
+        isDrag: false
     };
 }
 

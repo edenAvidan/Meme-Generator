@@ -3,18 +3,38 @@
 var gElCanvas;
 var gCanvas;
 
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
+
 initCanvas();
 
 function initCanvas() {
     gElCanvas = document.querySelector('canvas');
     gCanvas = gElCanvas.getContext('2d');
+    addListeners();
+}
+
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
     window.addEventListener('resize', () => {
         const elMemeEditor = document.querySelector('.meme-editor-container');
         if (!elMemeEditor.classList.contains('hidden')) {
             resizeMeme();
             renderMeme();
         }
-    });
+    })
+}
+
+function addMouseListeners() {
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mousedown', onDown)
+    gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchend', onUp)
 }
 
 function renderMeme() {
@@ -23,10 +43,14 @@ function renderMeme() {
     img.onload = () => {
         resizeMeme();
         gCanvas.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-        lines.forEach((line, idx) => {
+        lines.forEach(line => {
             setLineSettings(line);
-            drawText(line.txt, getTxtCenterX(gElCanvas.width, line.txt),
-                getInitialLineYPos(idx + 1), line.size);
+            if (!getLinePos()) {
+                setLinePos(createPos(getTxtCenterX(gElCanvas.width, line.txt),
+                    getInitialLineYPos(1)));
+            }
+            const linePos = line.pos;
+            drawText(line.txt, linePos.x, linePos.y, line.size);
         });
     }
 }
@@ -60,7 +84,8 @@ function onAddLine() {
     const newLineIdx = numOfLines - 1;
     setSelectedLineIdx(newLineIdx);
 
-    const linePos = createPos(getTxtCenterX(gElCanvas.width, getLineText()),
+    const defualtLineTxt = getLineText();
+    const linePos = createPos(getTxtCenterX(gElCanvas.width, defualtLineTxt),
         getInitialLineYPos(numOfLines));
     setLinePos(linePos);
 
@@ -93,7 +118,7 @@ function getTxtWidth(txt) {
     return gCanvas.measureText(txt).width;
 }
 
-function getTxtHeight(txt) {  // not currently used
+function getTxtHeight(txt) {
     return gCanvas.measureText(txt).height;
 }
 
@@ -115,3 +140,32 @@ function getInitialLineYPos(numOfLines) {
     else return gElCanvas.height / 2;
 }
 
+function onDown(ev) {
+    const pos = getEvPos(ev)
+
+    if (!isOverLine(pos, getTxtWidth(getLineText()))) return;
+
+    setLineDrag(true)
+    setLinePos(pos);
+}
+
+function onMove(ev) {
+    const pos = getEvPos(ev)
+
+    if (isOverLine(pos, getTxtWidth(getLineText()))) {
+        document.body.style.cursor = 'pointer';
+    }
+    else document.body.style.cursor = 'default';
+
+    const line = getCurrLine();
+    if (line.isDrag) {
+        const dx = pos.x - line.pos.x
+        const dy = pos.y - line.pos.y
+        moveLine(line, dx, dy);
+        renderMeme()
+    }
+}
+
+function onUp() {
+    setLineDrag(false);
+}
