@@ -56,6 +56,15 @@
     }
 }
 
+@media (max-width: 340px) {
+    .meme-editor-container .options-container,
+    .meme-editor-container .canvas-container { 
+        max-width: 200px;
+        min-width: 200px;
+        height: 200px;
+    }
+}
+
 @media (min-width: 750px) {
     .meme-editor-container:not(.hidden) {
         height: 80vh;
