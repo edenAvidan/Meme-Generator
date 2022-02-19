@@ -46,7 +46,7 @@ function renderMeme() {
         lines.forEach(line => {
             setLineSettings(line);
             if (!getLinePos()) {
-                setLinePos(createPos(getTxtCenterX(gElCanvas.width, line.txt),
+                setLinePos(createPos(getTxtCenterX(gElCanvas.width, getDefualtTxt()),
                     getInitialLineYPos(1)));
             }
             const linePos = line.pos;
@@ -169,7 +169,8 @@ function onMove(ev) {
     if (!getNumberOfLines()) return;
 
     const pos = getEvPos(ev)
-    if (isOverLine(pos, getTxtWidth(getLineText()))) {
+    if (!gTouchEvs.includes(ev.type) &&
+        isOverLine(pos, getTxtWidth(getLineText()))) {
         document.body.style.cursor = 'pointer';
     }
     else document.body.style.cursor = 'default';
