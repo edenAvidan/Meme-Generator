@@ -89,7 +89,6 @@ function isOverLine(eventPos, lineWidth) {
     const currLine = gMeme.lines[gMeme.selectedLineIdx]
     const { pos } = currLine;
 
-    // 257 needs to change to current line text width.
     return eventPos.x >= pos.x && eventPos.x <= pos.x + lineWidth &&
         eventPos.y <= pos.y && eventPos.y >= pos.y - currLine.size
 }
