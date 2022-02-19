@@ -56,22 +56,32 @@ function renderMeme() {
 }
 
 function onTextChange(txt) {
-    if (!getCurrLine()) addLine();
+    if (!getCurrLine()) {
+        addLine();
+        const txtColor = document.querySelector('input[name="text-color"]').value;
+        setTxtColor(txtColor);
+    }
     setLineTxt(txt);
     renderMeme();
 }
 
 function onTxtColorChange(color) {
+    if (!getNumberOfLines()) return;
+
     setTxtColor(color);
     renderMeme();
 }
 
 function onFontSizeChange(change) {
+    if (!getNumberOfLines()) return;
+
     changeFontSize(change);
     renderMeme();
 }
 
 function onSwitchLineFocus() {
+    if (!getNumberOfLines()) return;
+
     const { selectedLineIdx, lines } = getMeme();
     const nextLineIdx = selectedLineIdx + 1 < lines.length ? selectedLineIdx + 1 : 0;
     setSelectedLineIdx(nextLineIdx);
