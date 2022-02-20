@@ -195,24 +195,6 @@ function resizeMeme() {
     gElCanvas.height = elContainer.offsetHeight;
 }
 
-// TODO: fix line top border not showing if first line was resized
-function resizeTxtForCanvas() {
-    const line = getCurrLine();
-    const SIDE_PADDING = 20;
-    var isTxtResized = false;
-    setLineSettings(line);
-    while (getTxtWidth(line.txt) + SIDE_PADDING > gElCanvas.width) {
-        changeFontSize(-1);
-        setLineSettings(line);
-        isTxtResized = true;
-    }
-
-    if (isTxtResized) {
-        var lineY = line.pos ? line.pos.y : line.size;
-        setLinePos(createPos(SIDE_PADDING, lineY));
-    }
-}
-
 function getInitialLineYPos(numOfLines) {
     const BORDER_TOP_PADDING = 20;
     const fontSize = getDefualtTxtSize();

@@ -19,12 +19,10 @@ function onImgSelect(imgId, txt = undefined) {
 
 function onOpenRandomMeme() {
     const imgId = getRandomInt(1, getNumOfImgs());
-    const numOfLines = 2//getRandomInt(1, 2);
+    const numOfLines = getRandomInt(1, 2);
     onImgSelect(imgId, getRandMemeSentence());
-    resizeTxtForCanvas();
     if (numOfLines === 2) {
         onAddLine(getRandMemeSentence());
-        resizeTxtForCanvas();
         setSelectedLineIdx(0);
         renderMeme();
     }
