@@ -58,31 +58,31 @@ function getCurrLine() {
 }
 
 function getLineText() {
-    return gMeme.lines[gMeme.selectedLineIdx].txt;
+    return getCurrLine().txt;
 }
 
 function setLineTxt(txt) {
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt;
+    getCurrLine().txt = txt;
 }
 
 function setLineSize(newSize) {
-    gMeme.lines[gMeme.selectedLineIdx].size = newSize;
+    getCurrLine().size = newSize;
 }
 
 function setFontStyle(newFont) {
-    gMeme.lines[gMeme.selectedLineIdx].font = newFont;
+    getCurrLine().font = newFont;
 }
 
 function setTxtColor(newColor) {
-    gMeme.lines[gMeme.selectedLineIdx].color = newColor;
+    getCurrLine().color = newColor;
 }
 
 function getTxtColor() {
-    return gMeme.lines[gMeme.selectedLineIdx].color;
+    return getCurrLine().color;
 }
 
 function changeFontSize(change) {
-    gMeme.lines[gMeme.selectedLineIdx].size += change;
+    getCurrLine().size += change;
 }
 
 function setSelectedLineIdx(newIdx) {
@@ -90,23 +90,23 @@ function setSelectedLineIdx(newIdx) {
 }
 
 function setLineDrag(isDrag) {
-    gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
+    getCurrLine().isDrag = isDrag
 }
 
 function setLinePos(newPos) {
-    gMeme.lines[gMeme.selectedLineIdx].pos = newPos;
+    getCurrLine().pos = newPos;
 }
 
 function getLinePos() {
-    return gMeme.lines[gMeme.selectedLineIdx].pos;
+    return getCurrLine().pos;
 }
 
 function isOverLine(eventPos, lineWidth) {
-    const currLine = gMeme.lines[gMeme.selectedLineIdx]
+    const currLine = getCurrLine();
     const { pos } = currLine;
 
     return eventPos.x >= pos.x && eventPos.x <= pos.x + lineWidth &&
-        eventPos.y <= pos.y && eventPos.y >= pos.y - currLine.size
+        eventPos.y <= pos.y && eventPos.y >= pos.y - currLine.size;
 }
 
 function moveLine(line, dx, dy) {
