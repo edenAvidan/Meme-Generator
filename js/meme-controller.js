@@ -81,6 +81,28 @@ function onFontSizeChange(change) {
     renderMeme();
 }
 
+function onTxtAlign(align) {
+    const canvasWidth = gElCanvas.width;
+    const txtWidth = getTxtWidth(getLineText());
+    const pos = getLinePos();
+    var newLineX;
+
+    switch (align) {
+        case 'left':
+            newLineX = 20;
+            break;
+        case 'center':
+            newLineX = (canvasWidth - txtWidth) / 2;
+            break;
+        case 'right':
+            newLineX = (canvasWidth * 19 / 20) - txtWidth;
+            break;
+    }
+
+    setLinePos(createPos(newLineX, pos.y));
+    renderMeme();
+}
+
 function onSwitchLineFocus() {
     if (!getNumberOfLines()) return;
 
