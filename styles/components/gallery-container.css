@@ -2,6 +2,19 @@
     background-color: var(--clr1);
 }
 
+.gallery-container .gallery-options {
+    text-align: center;
+}
+
+.gallery-container .gallery-options button {
+    font-size: .8em;
+    margin-top: .7rem;
+    padding: .425rem;
+    border-radius: 1em;
+    color: var(--clr2);
+    background-color: var(--clr4);
+}
+
 .gallery-container .gallery-imgs {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

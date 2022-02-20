@@ -47,7 +47,7 @@ function renderMeme() {
         lines.forEach(line => {
             setLineSettings(line);
             if (!getLinePos()) {
-                setLinePos(createPos(getTxtCenterX(gElCanvas.width, getDefualtTxt()),
+                setLinePos(createPos(getCanvasMiddle(getDefualtTxt()),
                     getInitialLineYPos(1)));
             }
             drawText(line.txt, line.pos.x, line.pos.y, line.size);
@@ -83,23 +83,23 @@ function onFontSizeChange(change) {
 
 function onTxtAlign(align) {
     const canvasWidth = gElCanvas.width;
-    const txtWidth = getTxtWidth(getLineText());
-    const pos = getLinePos();
-    var newLineX;
+    const { pos, txt } = getCurrLine();
+    const txtWidth = getTxtWidth(txt);
+    var alignedX;
 
     switch (align) {
         case 'left':
-            newLineX = 20;
+            alignedX = 20;
             break;
         case 'center':
-            newLineX = (canvasWidth - txtWidth) / 2;
+            alignedX = (canvasWidth - txtWidth) / 2;
             break;
         case 'right':
-            newLineX = (canvasWidth * 19 / 20) - txtWidth;
+            alignedX = (canvasWidth * 19 / 20) - txtWidth;
             break;
     }
 
-    setLinePos(createPos(newLineX, pos.y));
+    setLinePos(createPos(alignedX, pos.y));
     renderMeme();
 }
 
@@ -116,13 +116,12 @@ function onSwitchLineFocus() {
     renderMeme();
 }
 
-function onAddLine() {
-    const numOfLines = addLine();
+function onAddLine(lineTxt = getDefualtTxt()) {
+    const numOfLines = addLine(lineTxt);
     const newLineIdx = numOfLines - 1;
     setSelectedLineIdx(newLineIdx);
 
-    const defualtLineTxt = getDefualtTxt();
-    const linePos = createPos(getTxtCenterX(gElCanvas.width, defualtLineTxt),
+    const linePos = createPos(getCanvasMiddle(lineTxt),
         getInitialLineYPos(numOfLines));
     setLinePos(linePos);
 
@@ -185,15 +184,33 @@ function getTxtWidth(txt) {
     return gCtx.measureText(txt).width;
 }
 
-function getTxtCenterX(x, txt) {
+function getCanvasMiddle(txt) {
     const txtWidth = getTxtWidth(txt);
-    return (x - txtWidth) / 2;
+    return (gElCanvas.width - txtWidth) / 2;
 }
 
 function resizeMeme() {
-    const elContainer = document.querySelector('.options-container');
+    const elContainer = document.querySelector('.editor-options-container');
     gElCanvas.width = elContainer.offsetWidth;
     gElCanvas.height = elContainer.offsetHeight;
+}
+
+// TODO: fix line top border not showing if first line was resized
+function resizeTxtForCanvas() {
+    const line = getCurrLine();
+    const SIDE_PADDING = 20;
+    var isTxtResized = false;
+    setLineSettings(line);
+    while (getTxtWidth(line.txt) + SIDE_PADDING > gElCanvas.width) {
+        changeFontSize(-1);
+        setLineSettings(line);
+        isTxtResized = true;
+    }
+
+    if (isTxtResized) {
+        var lineY = line.pos ? line.pos.y : line.size;
+        setLinePos(createPos(SIDE_PADDING, lineY));
+    }
 }
 
 function getInitialLineYPos(numOfLines) {

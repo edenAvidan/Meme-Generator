@@ -3,17 +3,35 @@
 const NUM_OF_IMGS = 18;
 const DEFUALT_TXT_SIZE = 28;
 const DEFUALT_TXT = 'Write Something!';
+const MEME_SENTENCES = [
+    'I never eat falafel',
+    'DOMS DOMS EVERYWHERE',
+    'Stop Using i in for loops',
+    'Armed in knowledge',
+    'Js error "Unexpected String"',
+    'One does not simply write js',
+    'I`m a simple man i see vanilla JS, i click like!',
+    'JS, HTML,CSS?? Even my momma can do that',
+    'May the force be with you',
+    'I know JS',
+    'JS Where everything is made up and the rules dont matter',
+    'Not sure if im good at programming or good at googling',
+    'But if we could',
+    'JS what is this?',
+    'Write hello world , add to cv 7 years experienced',
+];
+
 
 var gImgs = _createImgs();
 
 var gMeme;
 
-function createMeme() {
+function createMeme(selectedImgId, txt = DEFUALT_TXT) {
     gMeme = {
-        selectedImgId: 0,
+        selectedImgId,
         selectedLineIdx: 0,
         lines: [
-            _createLine()
+            _createLine(txt)
         ]
     };
 }
@@ -34,6 +52,10 @@ function addLine(txt = DEFUALT_TXT) {
     return gMeme.lines.push(_createLine(txt));
 }
 
+function getRandMemeSentence() {
+    return MEME_SENTENCES[getRandomInt(0, MEME_SENTENCES.length - 1)];
+}
+
 function deleteLine() {
     const lineIdx = gMeme.selectedLineIdx;
     gMeme.lines.splice(lineIdx, 1);
@@ -49,8 +71,8 @@ function getDefualtTxt() {
     return DEFUALT_TXT;
 }
 
-function setImg(imgId) {
-    gMeme.selectedImgId = imgId;
+function getNumOfImgs() {
+    return NUM_OF_IMGS;
 }
 
 function getCurrLine() {

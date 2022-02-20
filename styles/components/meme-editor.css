@@ -9,7 +9,7 @@
 } 
 
 
-.meme-editor-container .options-container {
+.meme-editor-container .editor-options-container {
     display: flex;
     flex-direction: column;
     gap: .6em;
@@ -22,18 +22,18 @@
     padding: 25px 45px;
 }
 
-.meme-editor-container .options-container .btn-container {
+.meme-editor-container .editor-options-container .btn-container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: .6em;
 }
 
-.meme-editor-container .options-container .btn-container .delete-line {
+.meme-editor-container .editor-options-container .btn-container .delete-line {
     font-size: 1.4em;
 }
 
-.meme-editor-container .options-container input[type=text] {
+.meme-editor-container .editor-options-container input[type=text] {
     background-color: var(--clr8);
     border: 0;
     border-radius: 1.7548rem;
@@ -43,7 +43,7 @@
 }
 
 @media (max-width: 1120px) {
-    .meme-editor-container .options-container,
+    .meme-editor-container .editor-options-container,
     .meme-editor-container .canvas-container { 
         min-width: 400px;
         max-width: 400px;
@@ -52,7 +52,7 @@
 }
 
 @media (max-width: 950px) {
-    .meme-editor-container .options-container,
+    .meme-editor-container .editor-options-container,
     .meme-editor-container .canvas-container { 
         max-width: 300px;
         min-width: 300px;
@@ -61,7 +61,7 @@
 }
 
 @media (max-width: 340px) {
-    .meme-editor-container .options-container,
+    .meme-editor-container .editor-options-container,
     .meme-editor-container .canvas-container { 
         max-width: 200px;
         min-width: 200px;

@@ -4,19 +4,30 @@
 function renderGallery() {
     const elGalllary = document.querySelector('.gallery-imgs');
     const imgs = getImgs();
-    var strHTML = '';
-    imgs.forEach((img) => {
-        strHTML += `<img src="${img.url}" class="gallery-img" onclick="onImgSelect(${img.id})" />`
-    })
-    elGalllary.innerHTML = strHTML;
+    var strHTMLs = imgs.map(img => {
+        return `<img src="${img.url}" class="gallery-img" onclick="onImgSelect(${img.id})" />`;
+    }).join('');
+    elGalllary.innerHTML = strHTMLs;
 };
 
-function onImgSelect(imgId) {
-    createMeme();
-    setImg(imgId);
+function onImgSelect(imgId, txt = undefined) {
+    createMeme(imgId, txt);
     setElInputs();
     openMemeEditor();
     renderMeme();
+}
+
+function onOpenRandomMeme() {
+    const imgId = getRandomInt(1, getNumOfImgs());
+    const numOfLines = 2//getRandomInt(1, 2);
+    onImgSelect(imgId, getRandMemeSentence());
+    resizeTxtForCanvas();
+    if (numOfLines === 2) {
+        onAddLine(getRandMemeSentence());
+        resizeTxtForCanvas();
+        setSelectedLineIdx(0);
+        renderMeme();
+    }
 }
 
 function openMemeEditor() {
