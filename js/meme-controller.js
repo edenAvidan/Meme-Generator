@@ -52,7 +52,8 @@ function renderMeme() {
             }
             drawText(line.txt, line.pos.x, line.pos.y, line.size);
         });
-        renderLineFocus();
+
+        if (getLineText()) renderLineFocus();
     }
 }
 
