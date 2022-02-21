@@ -44,7 +44,7 @@ function getImgs() {
     return gImgs;
 }
 
-function getNumberOfLines() {
+function getNumOfLines() {
     return gMeme.lines.length;
 }
 
