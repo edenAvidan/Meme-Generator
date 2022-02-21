@@ -19,13 +19,7 @@ function onImgSelect(imgId, txt = undefined) {
 
 function onOpenRandomMeme() {
     const imgId = getRandomInt(1, getNumOfImgs());
-    const numOfLines = getRandomInt(1, 2);
     onImgSelect(imgId, getRandMemeSentence());
-    if (numOfLines === 2) {
-        onAddLine(getRandMemeSentence());
-        setSelectedLineIdx(0);
-        renderMeme();
-    }
 }
 
 function openMemeEditor() {

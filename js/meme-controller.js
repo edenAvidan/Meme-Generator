@@ -43,17 +43,15 @@ function renderMeme() {
     img.onload = () => {
         resizeMeme();
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-
         lines.forEach(line => {
             setLineSettings(line);
             if (!getLinePos()) {
                 setLinePos(createPos(getCanvasMiddle(getDefualtTxt()),
                     getInitialLineYPos(1)));
             }
-            drawText(line.txt, line.pos.x, line.pos.y, line.size);
-        });
+            drawText(line.txt, line.pos.x, line.pos.y);
 
-        if (getLineText()) renderLineFocus();
+        });
     }
 }
 
@@ -68,20 +66,22 @@ function onTextChange(txt) {
 }
 
 function onTxtColorChange(color) {
-    if (!getNumberOfLines()) return;
+    if (!getNumOfLines()) return;
 
     setTxtColor(color);
     renderMeme();
 }
 
 function onFontSizeChange(change) {
-    if (!getNumberOfLines()) return;
+    if (!getNumOfLines()) return;
 
     changeFontSize(change);
     renderMeme();
 }
 
 function onTxtAlign(align) {
+    if (!getNumOfLines()) return;
+
     const canvasWidth = gElCanvas.width;
     const { pos, txt } = getCurrLine();
     const txtWidth = getTxtWidth(txt);
@@ -104,7 +104,7 @@ function onTxtAlign(align) {
 }
 
 function onSwitchLineFocus() {
-    if (!getNumberOfLines()) return;
+    if (!getNumOfLines()) return;
 
     const { selectedLineIdx, lines } = getMeme();
     const nextLineIdx = selectedLineIdx + 1 < lines.length ? selectedLineIdx + 1 : 0;
@@ -138,19 +138,25 @@ function onDeleteLine() {
     renderMeme();
 }
 
-function renderLineFocus() {
-    const currLine = getCurrLine();
-    if (!currLine) return
-
-    const { txt, size, pos } = currLine;
-    setLineSettings(currLine);
-    drawRect(pos.x - 10, pos.y + 15, getTxtWidth(txt) + 20, -size - 20);
+// still showing border because of img load time
+function onDownload(elLink) {
+    var imgContent = gElCanvas.toDataURL('image/jpeg', 1);
+    elLink.href = imgContent
 }
 
-function drawRect(x, y, textWidth, fontSize) {
-    gCtx.rect(x, y, textWidth, fontSize)
-    gCtx.stroke()
-}
+// function renderLineFocus() {
+//     const currLine = getCurrLine();
+//     if (!currLine) return
+
+//     const { txt, size, pos } = currLine;
+//     setLineSettings(currLine);
+//     drawRect(pos.x - 10, pos.y + 15, getTxtWidth(txt) + 20, -size - 20);
+// }
+
+// function drawRect(x, y, textWidth, fontSize) {
+//     gCtx.rect(x, y, textWidth, fontSize)
+//     gCtx.stroke()
+// }
 
 function setElInputs(txt = '', color = '#ffffff') {
     const elMemeTextInput = document.querySelector('input[name="meme-text"]');
@@ -204,7 +210,7 @@ function getInitialLineYPos(numOfLines) {
 }
 
 function onDown(ev) {
-    if (!getNumberOfLines()) return;
+    if (!getNumOfLines()) return;
 
     const pos = getEvPos(ev)
     if (!isOverLine(pos, getTxtWidth(getLineText()))) return;
@@ -214,7 +220,7 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-    if (!getNumberOfLines()) return;
+    if (!getNumOfLines()) return;
 
     const pos = getEvPos(ev);
     if (!gTouchEvs.includes(ev.type) &&
@@ -232,6 +238,6 @@ function onMove(ev) {
 }
 
 function onUp() {
-    if (!getNumberOfLines()) return;
+    if (!getNumOfLines()) return;
     setLineDrag(false);
 }
