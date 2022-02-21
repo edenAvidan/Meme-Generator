@@ -29,6 +29,21 @@
     gap: .6em;
 }
 
+.meme-editor-container .editor-options-container .btn-container > * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    height: 35px;
+    width: 35px;
+    font-size: 1em;
+    line-height: 1;
+    cursor: pointer;
+    background-color: white;
+    color: var(--clr7);
+    font-family: poppins-bold;
+}
+
 .meme-editor-container .editor-options-container .btn-container .delete-line {
     font-size: 1.4em;
 }

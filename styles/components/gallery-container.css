@@ -7,10 +7,13 @@
 }
 
 .gallery-container .gallery-options button {
-    font-size: .8em;
+    font-family:poppins-bold;
+    font-size: .7em;
     margin-top: .7rem;
     padding: .425rem;
     border-radius: 1em;
+    border: 0;
+    text-transform: capitalize;
     color: var(--clr2);
     background-color: var(--clr4);
 }
